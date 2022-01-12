@@ -5,10 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 
 //ex. ChainMail, Plate, Leather
@@ -20,9 +17,11 @@ import javax.persistence.Id;
 public class Armor implements Item{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "armor_id")
     private long armorId;
 
     private String name;
+    private int price;
     private int defense;
     private int speedMod;
     private int lvl;

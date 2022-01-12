@@ -14,36 +14,40 @@ import java.util.List;
 @ToString
 @Data
 @Entity
-public class Character {
+public class PlayerCharacter {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "character_id")
     private long characterId;
-
-
     private String name;
-    private int coins;
-    private int health;
-    private int lvl;
+
+    private int coins = 20;
+    private int health = 20;
+    private int lvl = 1;
     private PlayableCharacters pc;
-    private Item rhEquipped;
-    private Item lhEquipped;
-    private Item armor;
+    private long rhEquipped;
+    private long lhEquipped;
+    private long armor;
 
     @ManyToMany
     @JoinTable(
-            name = "character_item",
+            name = "character_weapon",
             joinColumns = @JoinColumn(name = "character_id"),
-            inverseJoinColumns = @JoinColumn(name = "item_id")
+            inverseJoinColumns = @JoinColumn(name = "weapon_id")
     )
-    private List<Item> inventory;
+    private List<Weapon> weapons;
 
     @ManyToMany
     @JoinTable(
-            name = "character_party",
+            name = "character_armor",
             joinColumns = @JoinColumn(name = "character_id"),
-            inverseJoinColumns = @JoinColumn(name = "character_id")
+            inverseJoinColumns = @JoinColumn(name = "armor_id")
     )
-    private List<Character> party;
+    private List<Armor> armors;
+
+    @ManyToMany
+    private List<PlayerCharacter> inParty;
+    @ManyToMany(mappedBy = "inParty")
+    private List<PlayerCharacter> hasParty;
+
 
 }
