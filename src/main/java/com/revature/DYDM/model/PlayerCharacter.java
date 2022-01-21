@@ -24,9 +24,12 @@ public class PlayerCharacter {
     private int health = 20;
     private int lvl = 1;
     private PlayableCharacters pc;
-    private long rhEquipped;
-    private long lhEquipped;
-    private long armor;
+    @OneToOne
+    private Weapon rhEquipped;
+    @OneToOne
+    private Weapon lhEquipped;
+    @OneToOne
+    private Armor armor;
 
     @ManyToMany
     @JoinTable(
